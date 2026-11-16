@@ -61,7 +61,7 @@ cd DA-GNN
 cd Algorithm
 
 # run the module DA-GNN
-python mpnn_geo_v19_dann.py  --edge_hidden_size 16 --gpuid 0 --num_step_message_passing 2  --domain_dp 0.1
+python mpnn_geo_v19_dann.py --epochs 4000 --gpuid 0 --node_embedding_size 32 --node_hidden_size 64 --edge_hidden_size 16 --num_step_message_passing 2 --aggregator_type sum --lr 0.01 --gnn_dropout 0.3 --edge_dropout 0.2 --nn_dropout1 0.3 --regs 0.0005 --label_smoothing 0.01 --use_dann 1 --domain_weight 0.1 --domain_hidden_dim 64 --domain_dp 0.1 --use_mmd 1 --mmd_weight 0.1 --use_reachability_feat 1
 
 ```
 
@@ -69,9 +69,23 @@ python mpnn_geo_v19_dann.py  --edge_hidden_size 16 --gpuid 0 --num_step_message_
 
 | Hyperparameter          | Description                                           |
 | :-----------------------| ----------------------------------------------------- |
+| epochs                  | the number of training epochs                         |
+| node_hidden_size        | the node embedding dimension                          |
 | edge_hidden_size        | the edge embedding dimension                          |
+| lr                      | learning rate                                         |
+| gnn_dropout             | GNN layer dropout rate                                |
+| edge_dropout            | edge feature dropout rate                             |
+| nn_dropout1             | node feature dropout rate                             |
+| regs                    | weight decay coefficient                              |
+| label_smoothing         | label smoothing magnitude                             |
+| use_dann                | whether to use DANN                                   |
 | num_step_message_passing| the number of MPNN layers                             |
 | domain_dp               | domain random dropout rate                            |
+| domain_weight           | weight of domain-classification loss                  |
+| domain_hidden_dim       | hidden dimension of the domain classifier             |
+| use_mmd                 | whether to enable MMD regularization                  |
+| mmd_weight              | weight of the MMD loss                                |
+| use_reachability_feat   | whether to append reachability as a node feature      |
 | gpuid                   | the GPU index                                         |
 
 
